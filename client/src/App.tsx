@@ -1,7 +1,18 @@
-import SendMessage from "./components/SendMessage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ErrorPage, RootPage } from "./pages";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
-  return <SendMessage />;
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootPage />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <HomePage /> }],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;
