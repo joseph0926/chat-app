@@ -79,6 +79,8 @@ const SendMessage = () => {
         ))}
       </ul>
       <p>{activity}</p>
+
+      <h2>{socket?.id}</h2>
     </div>
   );
 };

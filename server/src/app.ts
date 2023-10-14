@@ -14,7 +14,6 @@ const io = new Server(expressServer, {
 });
 
 io.on('connection', (socket) => {
-  socket.emit('message', 'Only One User');
   socket.broadcast.emit('message', `User ${socket.id.substring(0, 5)}가 연결되었습니다.`);
 
   socket.on('message', (data) => {
