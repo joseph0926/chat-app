@@ -80,7 +80,7 @@ const SendMessage = () => {
       </ul>
       <p>{activity}</p>
 
-      <h2>{socket?.id}</h2>
+      <h2>{socket?.id?.substring(0, 5)}</h2>
     </div>
   );
 };
