@@ -19,6 +19,16 @@ const NewUserPage = () => {
         email: user?.emailAddresses[0].emailAddress,
       }),
     retry: 2,
+    onSuccess: (data) => {
+      if (data) {
+        router("/");
+      }
+    },
+    onError: (error) => {
+      console.log(error);
+      // toast등 추가
+      router("/");
+    },
   });
 
   useEffect(() => {
@@ -27,13 +37,7 @@ const NewUserPage = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    if (!isPending && data) {
-      router("/");
-    }
-  }, [isPending, data]);
-
-  return <div>NewUserPage</div>;
+  return <div />;
 };
 
 export default NewUserPage;
