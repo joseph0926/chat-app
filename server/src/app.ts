@@ -2,6 +2,7 @@ import { Server } from 'socket.io';
 import express from 'express';
 import cors from 'cors';
 import authRouter from './routes/auth.route';
+import { chatSocket } from './controllers/chat.controller';
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -26,18 +27,4 @@ const io = new Server(expressServer, {
   }
 });
 
-io.on('connection', (socket) => {
-  socket.broadcast.emit('message', `User ${socket.id.substring(0, 5)}가 연결되었습니다.`);
-
-  socket.on('message', (data) => {
-    io.emit('message', `${socket.id.substring(0, 5)}: ${data}`);
-  });
-
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('message', `User ${socket.id.substring(0, 5)}가 나갔습니다.`);
-  });
-
-  socket.on('activity', (name) => {
-    socket.broadcast.emit('activity', name);
-  });
-});
+chatSocket(io);
