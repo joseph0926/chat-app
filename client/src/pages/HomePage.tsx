@@ -10,7 +10,7 @@ const HomePage = () => {
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5000");
+    const newSocket = io("http://localhost:5000/api/chat");
     setSocket(newSocket);
 
     return () => {
@@ -38,6 +38,7 @@ const HomePage = () => {
     return () => {
       if (socket) {
         socket.off("message");
+        socket.off("activity");
       }
     };
   }, [socket]);
